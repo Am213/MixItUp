@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Mix It Up</title>
+    <link rel = "icon" type = "image/x-icon" href = "images/cocktail-glass_1f378.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom right, #232525, #3f4a4e);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: black;
+        }
+
+        header img {
+            height: 80px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        nav a {
+            margin-left: 15px;
+            color: #FF6100;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        #search-form {
+            display: flex;
+            margin-left: 15px;
+        }
+
+        #search-query {
+            width: 200px;
+            font-size: 1rem;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+
+        #search-button {
+            background: none;
+            border: none;
+            color: #FF6100;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        main {
+            padding: 40px;
+            background-color: black;
+            margin: 40px;
+            border-radius: 10px;
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+            background-color: black;
+            color: #FF6100;
+            margin: 0 40px 40px;
+            border-radius: 10px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .contact-form h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .form-control label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-control input,
+        .form-control textarea {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+
+        .form-control input:focus,
+        .form-control textarea:focus {
+            outline: none;
+            border-color: #5bc0de;
+        }
+
+        .form-control textarea {
+            height: 150px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .form-actions button {
+            padding: 10px 20px;
+            background-color: #5bc0de;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .form-actions button:hover {
+            background-color: #31b0d5;
+        }
+
+      .contact-form input[type="text"], 
+      .contact-form input[type="email"] {
+        width: 300px;
+       }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="./index.html"><img src="./images/Mix.gif" alt="Logo" width="150" height="auto"></a>
+
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="./Recommendations.html">Recommendation</a>
+            <a href="./contact-us.html">Contact Us</a>
+            <a href="./Shop.html">Shop</a>
+            <form id="search-form">
+                <input type="text" id="search-query" name="search-query" placeholder="Search..." required>
+                <button type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            </form>
+        </nav>
+    </header>
+
+    <main>
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <div class="form-control">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-control">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-control">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2023 Mix It Up. All rights reserved.
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const contactForm = document.getElementById('contact-form');
+        const loadingMessage = document.getElementById('loading-message');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            loadingMessage.style.display = 'block';
+
+            try {
+                // Your code for sending the contact form data
+                alert('Message sent successfully!');
+            } catch (error) {
+                console.error(error);
+                alert('Oops, something went wrong. Please try again later.');
+            } finally {
+                loadingMessage.style.display = 'none';
+            }
+        });
+
+        $(document).ready(function() {
+            $('#search-form').on('submit', function(event) {
+                event.preventDefault();
+                const searchQuery = $('#search-query').val().trim();
+                if (searchQuery) {
+                    window.location.href = `search-results.html?search-query=${encodeURIComponent(searchQuery)}`;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

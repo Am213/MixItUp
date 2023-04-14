@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations | Mix It Up</title>
+    <link rel = "icon" type = "image/x-icon" href = "images/cocktail-glass_1f378.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom right, #232525, #3f4a4e);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: black;
+        }
+
+        header img {
+            height: 80px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        nav a {
+            margin-left: 15px;
+            color: #FF6100;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        #search-form {
+            display: flex;
+            margin-left: 15px;
+        }
+
+        #search-query {
+            width: 200px;
+            font-size: 1rem;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+
+        #search-button {
+            background: none;
+            border: none;
+            color: #FF6100;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        main {
+            padding: 40px;
+            background-color: black;
+            color: #FF6100;
+            margin: 40px;
+            border-radius: 10px;
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+            background-color: black;
+            color: #FF6100;
+            margin: 0 40px 40px;
+            border-radius: 10px;
+        }
+
+        .random-cocktails {
+            margin-bottom: 40px;
+        }
+
+        .random-cocktails h1 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #cocktail-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .cocktail {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 300px;
+        }
+
+        .cocktail img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .cocktail-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .cocktail-info h3 {
+            font-size: 1.5rem;
+        }
+
+        .cocktail-info p {
+            font-size: 1rem;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="./index.html"><img src="./images/Mix.gif" alt="Logo" width="150" height="auto"></a>
+
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="./Recommendations.html">Recommendation</a>
+            <a href="./contact-us.html">Contact Us</a>
+            <a href="./Shop.html">Shop</a>
+            <form id="search-form">
+                <input type="text" id="search-query" name="search-query" placeholder="Search..." required>
+                <button type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            </form>
+        </nav>
+    </header>
+
+    <main>
+        <section class="random-cocktails">
+            <h1>Top 10 Cocktails of The Day</h1>
+            <div id="cocktail-list"></div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2023 Mix It Up. All rights reserved.
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const apiKey = 'aArufbK1jpXFkUdYu+4fDw==5tfzv7R8lqqW2bAB';
+        const cocktailList = document.getElementById('cocktail-list');
+        async function getRandomCocktails() {
+    const cocktailSet = new Set();
+
+    async function fetchRandomCocktail() {
+        const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php?key=${apiKey}`);
+        const data = await response.json();
+        const drink = data.drinks[0];
+        if (drink && drink.strCategory === 'Cocktail') {
+            cocktailSet.add(drink);
+        }
+    }
+
+    while (cocktailSet.size < 10) {
+        const fetchPromises = [];
+        for (let i = 0; i < 5; i++) { 
+            fetchPromises.push(fetchRandomCocktail());
+        }
+        await Promise.all(fetchPromises);
+    }
+
+    return Array.from(cocktailSet);
+}
+
+
+        async function displayCocktails() {
+            const cocktails = await getRandomCocktails();
+            cocktails.forEach(cocktail => {
+                const cocktailItem = document.createElement('div');
+                cocktailItem.classList.add('cocktail');
+
+                const cocktailImage = document.createElement('img');
+                cocktailImage.src = cocktail.strDrinkThumb;
+                cocktailImage.alt = cocktail.strDrink;
+
+                const cocktailInfo = document.createElement('div');
+                cocktailInfo.classList.add('cocktail-info');
+
+                const cocktailTitle = document.createElement('h3');
+                cocktailTitle.textContent = cocktail.strDrink;
+
+                const cocktailCategory = document.createElement('p');
+                cocktailCategory.innerHTML = `<strong>Category:</strong> ${cocktail.strCategory}`;
+
+                const cocktailIngredients = document.createElement('p');
+                cocktailIngredients.innerHTML = `<strong>Ingredients:</strong> ${getIngredients(cocktail)}`;
+
+                const cocktailInstructions = document.createElement('p');
+                cocktailInstructions.innerHTML = `<strong>Instructions:</strong> ${cocktail.strInstructions}`;
+
+                cocktailInfo.appendChild(cocktailTitle);
+                cocktailInfo.appendChild(cocktailCategory);
+                cocktailInfo.appendChild(cocktailIngredients);
+                cocktailInfo.appendChild(cocktailInstructions);
+
+                cocktailItem.appendChild(cocktailImage);
+                cocktailItem.appendChild(cocktailInfo);
+
+                cocktailList.appendChild(cocktailItem);
+            });
+        }
+
+        displayCocktails();
+
+        function getIngredients(cocktail) {
+            let ingredients = '';
+            for (let i = 1; i <= 15; i++) {
+                const ingredient = cocktail[`strIngredient${i}`];
+                const measure = cocktail[`strMeasure${i}`];
+                if (ingredient && measure) {
+                    ingredients += `${measure.trim()} ${ingredient.trim()}, `;
+                } else if (ingredient) {
+                    ingredients += `${ingredient.trim()}, `;
+                }
+            }
+            return ingredients.slice(0, -2);
+        }
+
+        $(document).ready(function() {
+    $('#search-form').on('submit', function(event) {
+        event.preventDefault();
+        const searchQuery = $('#search-query').val().trim();
+        if (searchQuery) {
+            window.location.href = `search-results.html?search-query=${encodeURIComponent(searchQuery)}`;
+        }
+    });
+});
+    </script>
+</body>
+</html>

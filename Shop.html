@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Mix It Up</title>
+    <link rel = "icon" type = "image/x-icon" href = "images/cocktail-glass_1f378.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+            * {
+                 margin: 0;
+                 box-sizing: border-box;
+        }
+            body {
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom right, #232525, #3f4a4e);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: black;
+        }
+
+        header img {
+            height: 80px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        nav a {
+            margin-left: 15px;
+            color: #FF6100;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        #search-form {
+            display: flex;
+            margin-left: 15px;
+        }
+
+        #search-query {
+            width: 200px;
+            font-size: 1rem;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+
+        #search-button {
+            background: none;
+            border: none;
+            color: #FF6100;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+   
+
+        main {
+            padding: 40px;
+            background-color: black;
+            color: #FF6100;
+            margin: 40px;
+            border-radius: 10px;
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+            background-color: black;
+            color: #FF6100;
+            margin: 0 40px 40px;
+            border-radius: 10px;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .product h3 {
+            font-size: 1.5rem;
+        }
+
+        .product p {
+            font-size: 1rem;
+        }
+
+        .buy-now-btn {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #555;
+        }
+
+
+        .buy-now-btn {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="./index.html"><img src="./images/Mix.gif" alt="Logo" width="150" height="auto"></a>
+
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="./Recommendations.html">Recommendation</a>
+            <a href="./contact-us.html">Contact Us</a>
+            <a href="./Shop.html">Shop</a>
+            <form id="search-form">
+                <input type="text" id="search-query" name="search-query" placeholder="Search..." required>
+                <button type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            </form>
+        </nav>
+    </header>
+
+    <main>
+        <section class="shop">
+            <h1>Shop Our Selection of Cocktail Products</h1>
+            <div class="product-list">
+                <!-- You can add more products here -->
+                <div class="product">
+                    <img src="./images/whiteoak.jpg" alt="White Oak Rum">
+                    <h3>White Oak Rum</h3>
+                    <p>Price: $105</p>
+                    <form action = "https://www.naughtygrapett.com/product/white-oak-3/" target = "_blank">
+                        <input class = "buy-now-btn" type = "submit" value = "Buy Now" />
+                    </form>
+                </div>
+                <div class="product">
+                    <img src="./images/gin.png" alt="Gin">
+                    <h3>Gin</h3>
+                    <p>Price: $300</p>
+                    <form action = "https://www.naughtygrapett.com/product/beefeater-pink-strawberry-gin/" target = "_blank">
+                        <input class = "buy-now-btn" type = "submit" value = "Buy Now" />
+                    </form>
+                </div>
+                <div class="product">
+                    <img src="./images/smirnoff.jpg" alt="Vodka" height="auto">
+                    <h3>Vodka</h3>
+                    <p>Price: $177</p>
+                    <form action = "https://www.naughtygrapett.com/product/smirnoff-red-label-3/" target = "_blank">
+                        <input class = "buy-now-btn" type = "submit" value = "Buy Now" />
+                    </form>
+                </div>
+                <div class="product">
+                    <img src="./images/johnniewalkerblack.jpg" alt="Blended Whiskey">
+                    <h3>Blended Whiskey</h3>
+                    <p>Price: $470</p>
+                    <form action = "https://www.naughtygrapett.com/product/johnnie-walker-black-12-yr-7/" target = "_blank">
+                        <input class = "buy-now-btn" type = "submit" value = "Buy Now" />
+                    </form>
+                </div>
+                <div class="product">
+                    <img src="./images/jackdaniels.jpg" alt="Bourbon">
+                    <h3>Bourbon</h3>
+                    <p>Price: $400</p>
+                    <form action = "https://www.naughtygrapett.com/product/jack-daniel-whisky/" target = "_blank" >
+                        <input class = "buy-now-btn" type = "submit" value = "Buy Now" />
+                    </form>
+                </div>
+                <div class="product">
+                    <img src="./images/jose-cuervo-especial-silver.jpg" alt="Tequila">
+                    <h3>Jose Cuervo Tequila</h3>
+                    <p>Price: $175</p>
+                    <form action = "https://www.naughtygrapett.com/product/jose-cuervo-especial/" target = "_blank" >
+                        <input class = "buy-now-btn" type = "submit" value = "Buy Now" />
+                    </form>
+                </div>
+                <div class="product">
+                    <img src="./images/hennessy.webp" alt="Cognac">
+                    <h3>Hennessy</h3>
+                    <p>Price: $508</p>
+                    <form action = "https://www.naughtygrapett.com/product/hennessy-vs-2/" target = "_blank" >
+                        <input class = "buy-now-btn" type = "submit" value = "Buy Now" />
+                    </form>
+                </div>
+                <div class="product">
+                    <img src="./images/jaeger.webp" alt="Liqeur">
+                    <h3>Jägermeister</h3>
+                    <p>Price: $315</p>
+                    <form action = "https://www.naughtygrapett.com/product/jagermeister-original/" target = "_blank" >
+                        <input class = "buy-now-btn" type = "submit" value = "Buy Now" />
+                    </form>
+                </div>
+                <div class="product">
+                    <img src="./images/cocktailshaker.png" alt="Cocktail Shaker">
+                    <h3>Cocktail Shaker</h3>
+                    <p>Price: $90</p>
+                    <form action = "https://abrahamdist.com/product/three-piece-cocktail-mixers/" target = "_blank" >
+                        <input class = "buy-now-btn" type = "submit" value = "Buy Now" />
+                    </form>
+                </div>
+                <div class="product">
+                    <img src="./images/cocktailmuddler.jpg" alt="Cocktail Muddler">
+                    <h3>Cocktail Muddler</h3>
+                    <p>Price: $60</p>
+                    <form action = "https://myexcellentstores.com/tt/joie-cocktail-muddler.html" target = "_blank" >
+                        <input class = "buy-now-btn" type = "submit" value = "Buy Now" />
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2023 Mix It Up. All rights reserved.
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Add your existing scripts here
+
+        $(document).ready(function() {
+            $('#search-form').on('submit', function(event) {
+                event.preventDefault();
+                const searchQuery = $('#search-query').val().trim();
+                if (searchQuery) {
+                    window.location.href = `search-results.html?search-query=${encodeURIComponent(searchQuery)}`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
